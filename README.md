@@ -1,15 +1,15 @@
-Tournament project
+## Tournament project
 
 Full Stack Nanodegree starter code taken from:
 https://github.com/udacity/fullstack-nanodegree-vm
 
 
-Issues:
+#### Issues:
 
-- playerStandings in tournament.py
+- playerStandings in tournament.py doesn't work, because I don't know how to make it work, he-he
 
--- simpler
--- how to combine
+	- simpler
+	- how to combine
 
 
 - what are views?
