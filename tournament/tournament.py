@@ -68,24 +68,10 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-
     DB = connect()
     c = DB.cursor()
-
-    c.execute("""
-        SELECT id, name, wins, wins + losses FROM
-            (SELECT id, name, wins, losses FROM
-                (SELECT * FROM players
-                    LEFT JOIN
-                    (SELECT COUNT(*) AS wins, winnerID FROM matches GROUP BY winnerID)
-                        AS wins ON (id = winnerID)) AS wins
-                        LEFT JOIN
-                    (SELECT COUNT(*) AS losses, loserID FROM matches GROUP BY loserID)
-                        AS losses ON (id = loserID))
-                    AS table1""")
-
+    c.execute("SELECT * FROM player_matches ORDER by wins DESC;")
     standings = c.fetchall()
-    print standings
 
     return standings
 
@@ -99,7 +85,7 @@ def reportMatch(winner, loser):
     """
     DB = connect()
     c = DB.cursor()
-    c.execute("INSERT INTO matches VALUES (%s)", (winner, loser,))
+    c.execute("INSERT INTO matches VALUES %s", ((winner, loser),))
     DB.commit()
     DB.close()
 
@@ -119,7 +105,6 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
     games = []
     standings = playerStandings()
 
@@ -134,5 +119,3 @@ def swissPairings():
 
     return games
 
-
-# https://review.udacity.com/#!/projects/4/start
