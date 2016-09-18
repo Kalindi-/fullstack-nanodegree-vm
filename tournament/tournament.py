@@ -15,7 +15,7 @@ def deleteMatches():
     """Remove all the match records from the database."""
     DB = connect()
     c = DB.cursor()
-    c.execute("DELETE FROM matches")
+    c.execute("DELETE FROM matches;")
     DB.commit()
     DB.close()
 
@@ -24,7 +24,7 @@ def deletePlayers():
     """Remove all the player records from the database."""
     DB = connect()
     c = DB.cursor()
-    c.execute("DELETE FROM players")
+    c.execute("DELETE FROM players;")
     DB.commit()
     DB.close()
 
@@ -50,7 +50,7 @@ def registerPlayer(name):
     """
     DB = connect()
     c = DB.cursor()
-    c.execute("INSERT INTO players (name) VALUES (%s)", (name,))
+    c.execute("INSERT INTO players (name) VALUES (%s);", (name,))
     DB.commit()
     DB.close()
 
@@ -85,7 +85,7 @@ def reportMatch(winner, loser):
     """
     DB = connect()
     c = DB.cursor()
-    c.execute("INSERT INTO matches VALUES %s", ((winner, loser),))
+    c.execute("INSERT INTO matches VALUES %s;", ((winner, loser),))
     DB.commit()
     DB.close()
 
